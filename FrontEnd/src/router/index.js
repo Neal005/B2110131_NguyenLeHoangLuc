@@ -1,36 +1,74 @@
-import { createWebHistory, createRouter } from "vue-router";
-import ContactBook from "@/views/ContactBook.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import Cookies from "js-cookie";
+import ExploreView from "../layouts/ExploreView.vue";
+import LandingView from "../layouts/LandingView.vue";
+
+import HomeView from "../views/Explore/HomeView.vue";
+import AccountView from "../views/Explore/AccountView.vue";
+
+import RegisterView from "../views/Landing/RegisterView.vue";
+import LoginView from "../views/Landing/LoginView.vue";
+import IndexView from "../views/Landing/IndexView.vue";
 
 const routes = [
-    {
-        path: "/",
-        name: "contactbook",
-        component: ContactBook,
+  {
+    path: "/",
+    name: "Landing",
+    component: LandingView,
+    children: [
+      {
+        path: "",
+        name: "Index",
+        component: IndexView,
+      },
+      {
+        path: "register",
+        name: "Register",
+        component: RegisterView,
+      },
+      {
+        path: "login",
+        name: "Login",
+        component: LoginView,
+      },
+    ],
+    beforeEnter: (to, from, next) => {
+      if (Cookies.get("token")) {
+        window.location.href = "/explore";
+      } else {
+        next();
+      }
     },
-
-    {
-        path: "/:pathMatch(.*)*",
-        name: "notfound",
-        component: () => import("@/views/NotFound.vue"),
+  },
+  {
+    path: "/explore",
+    name: "Explore",
+    component: ExploreView,
+    children: [
+      {
+        path: "",
+        name: "Home",
+        component: HomeView,
+      },
+      {
+        path: 'account',
+        name: "Account",
+        component: AccountView
+      }
+    ],
+    beforeEnter: (to, from, next) => {
+      if (!Cookies.get("token")) {
+        window.location.href = "/";
+      } else {
+        next();
+      }
     },
-
-    {
-        path: "/contacts/:id",
-        name: "contact.edit",
-        component: () => import("@/views/ContactEdit.vue"),
-        props: true // Truyền các biến trong $route.params vào làm props
-    },
-    
-    {
-        path: "/",
-        name: "contact.add",
-        component: () => import("@/views/ContactAdd.vue"),
-    },
+  },
 ];
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
-    routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
 });
 
 export default router;

@@ -1,23 +1,32 @@
-<script>
-import AppHeader from "@/components/AppHeader.vue";
+<script setup>
+import { useStore } from "vuex";
+import TheLoading from "./components/TheLoading.vue";
+import TheToast from "./components/TheToast.vue";
+import { computed } from "vue";
 
-export default {
-  components: {
-    AppHeader,
-  },
-}
+const store = useStore();
+
+const loading = computed(() => {
+  return store.state.loading;
+});
+
+const toastShow = computed(() => {
+  return store.state.toast.show;
+});
 </script>
+
 <template>
-  <div id="app">
-    <AppHeader />
-    <div class="container mt-3">
-      <router-view />
-    </div>
+  <div class="parent bg-slate-100">
+    <TheLoading v-show="loading" />
+    <TheToast v-show="toastShow" />
+    <router-view></router-view>
   </div>
 </template>
+
 <style>
-.page {
-  max-width: 400px;
-  margin: auto;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 </style>
