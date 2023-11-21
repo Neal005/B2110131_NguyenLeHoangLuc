@@ -9,9 +9,9 @@
   "dependencies": {
     "axios": "^0.27.2",
     "js-cookie": "^3.0.1",
-    "vue": "^3.2.37",
+    "vue": "^3.2.13",
     "vue-router": "^4.0.3",
-    "vue-toastification": "^1.7.15",
+    "vue-toastification": "^1.7.14",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
