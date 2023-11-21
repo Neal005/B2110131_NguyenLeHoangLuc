@@ -1,8 +1,9 @@
 # B2110131_NguyenLeHoangLuc
 
 # Install for frontend
-npm i \n
-[if got problem when installing use] \n
+npm i 
+#
+[if got problem when installing use] 
 npm install --force
 
 # Install for backend
