@@ -152,7 +152,7 @@ const deleteAccount = async () => {
             :disabled="loading"
             class="save-btn transition hover:bg-sky-600 px-4 py-2 rounded bg-sky-500 text-white disabled:bg-gray-50"
           >
-            Saqlash
+            Help
           </button>
         </div>
         <div class="right">
@@ -161,14 +161,14 @@ const deleteAccount = async () => {
             :disabled="loading"
             class="logout-btn transition hover:bg-gray-500 px-4 py-2 rounded bg-gray-400 text-white mr-4 disabled:bg-gray-50"
           >
-            Chiqish
+            Exit
           </button>
           <button
             @click="deleteAccount()"
             :disabled="loading"
             class="delete-btn transition hover:bg-red-500 px-4 py-2 rounded bg-red-400 text-white disabled:bg-gray-50"
           >
-            O'chirish
+            Off
           </button>
         </div>
       </div>
